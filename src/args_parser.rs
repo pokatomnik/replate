@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-pub fn parse(args: Vec<String>) -> (HashMap<String, String>, HashMap<String, String>, usize) {
+pub fn parse(args: Vec<String>) -> (HashMap<String, String>, HashMap<String, String>) {
   let mut tpl_kv: HashMap<String, String> = HashMap::new();
   let mut other_args: HashMap<String, String> = HashMap::new();
   let len = args.len();
@@ -17,5 +17,5 @@ pub fn parse(args: Vec<String>) -> (HashMap<String, String>, HashMap<String, Str
     }
   }
 
-  return (tpl_kv, other_args, len);
+  return (tpl_kv, other_args);
 }

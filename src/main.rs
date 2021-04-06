@@ -8,12 +8,8 @@ mod constants;
 mod help;
 
 fn main() {
-    // let mut tpl_kv: HashMap<String, String> = HashMap::new();
-    // let mut other_args: HashMap<String, String> = HashMap::new();
     let args: Vec<String> = env::args().collect();
-    let (tpl_kv_parsed, other_args_parsed, len) = args_parser::parse(args.clone());
-    let mut tpl_kv = tpl_kv_parsed.clone();
-    let mut other_args = other_args_parsed.clone();
+    let len = args.len();
 
     if len < 2 {
         return;
@@ -29,6 +25,10 @@ fn main() {
         help::display_help();
         return;
     }
+
+    let (tpl_kv_parsed, other_args_parsed) = args_parser::parse(args.clone());
+    let mut tpl_kv = tpl_kv_parsed.clone();
+    let mut other_args = other_args_parsed.clone();
 
     for i in (1..len).step_by(2) {
         let key = args[i].clone();
