@@ -26,21 +26,8 @@ fn main() {
         return;
     }
 
-    let (tpl_kv_parsed, other_args_parsed) = args_parser::parse(args.clone());
-    let mut tpl_kv = tpl_kv_parsed.clone();
-    let mut other_args = other_args_parsed.clone();
+    let (tpl_kv, other_args) = args_parser::parse(args.clone());
 
-    for i in (1..len).step_by(2) {
-        let key = args[i].clone();
-        let value = args[i + 1].clone();
-        if key.starts_with("--") {
-            other_args.insert(key, value);
-        } else if key.starts_with("-") {
-            tpl_kv.insert(key.trim_start_matches("-").to_owned(), value);
-        } else {
-            other_args.insert(key, value);
-        }
-    }
     let mut template_path_arg = constants::DEFAULT_TEMPLATE_PATH;
     if other_args.contains_key(constants::KEY_TEMPLATE) {
         template_path_arg = other_args.get(constants::KEY_TEMPLATE).unwrap();
