@@ -3,9 +3,9 @@ use std::env;
 use std::fs;
 use std::path::Path;
 
-mod args_parser;
 mod constants;
 mod help;
+mod utils;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -26,7 +26,7 @@ fn main() {
         return;
     }
 
-    let (tpl_kv, other_args) = args_parser::parse(args.clone());
+    let (tpl_kv, other_args) = utils::parse(args.clone());
 
     let mut template_path_arg = constants::DEFAULT_TEMPLATE_PATH;
     if other_args.contains_key(constants::KEY_TEMPLATE) {
