@@ -5,7 +5,7 @@ pub fn display_help() {
   println!("Fills the template with provided keys and values");
   println!("  --help                  print this information");
   println!("  --template filename     use specified template file to fill, \"template.tpl\" is used by default");
-  println!("  -key value              replace \"{{key}}\" (without quotes) with \"value\" (without quotes)");
+  println!("  -key value              replace \"{{{{key}}}}\" (without quotes) with \"value\" (without quotes)");
 }
 
 pub fn display_template_missing(template_path: &str) {

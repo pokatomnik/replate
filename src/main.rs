@@ -1,7 +1,4 @@
-use regex::Regex;
 use std::env;
-use std::fs;
-use std::path::Path;
 
 mod constants;
 mod help;
@@ -28,26 +25,16 @@ fn main() {
 
     let (tpl_kv, other_args) = utils::parse(args.clone());
 
-    let mut template_path_arg = constants::DEFAULT_TEMPLATE_PATH;
-    if other_args.contains_key(constants::KEY_TEMPLATE) {
-        template_path_arg = other_args.get(constants::KEY_TEMPLATE).unwrap();
-    }
+    let template_path_arg = &utils::get_template_path(other_args);
 
-    let path = Path::new(template_path_arg);
-    if !path.exists() || !path.is_file() {
+    if !utils::template_exists(template_path_arg) {
         help::display_template_missing(template_path_arg);
         return;
     }
 
-    let mut contents =
-        fs::read_to_string(template_path_arg).expect("Something went wrong reading the file");
-    for (k, v) in tpl_kv.iter() {
-        let key = format!("{{{{{}}}}}", k);
-        contents = contents.replace(&key, v);
-    }
+    let mut contents = utils::read_file_contents(template_path_arg);
+    contents = utils::replace_with_source(contents, tpl_kv);
+    contents = utils::cleanup_ignored(contents);
 
-    let re = Regex::new("[{]{2}.+[}]{2}").unwrap();
-    let res = re.replace_all(&contents, "").to_string();
-
-    println!("{}", res);
+    println!("{}", contents);
 }
