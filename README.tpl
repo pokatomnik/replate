@@ -2,6 +2,8 @@
 
 A simple tool for filling templates
 
+![alt text](example.gif)
+
 ## Display usage info
 
 ```
