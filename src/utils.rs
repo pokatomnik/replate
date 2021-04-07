@@ -51,6 +51,9 @@ pub fn replace_with_source(mut contents: String, source: HashMap<String, String>
 }
 
 pub fn cleanup_ignored(contents: String) -> String {
-  let re = Regex::new("[{]{2}[^{{]{2}[^}}]{2}+[}]{2}").unwrap();
-  return re.replace_all(&contents, "").to_string();
+  let re = Regex::new("[{]{2}[^!^{{]{2}[^}}]{2}+[}]{2}").unwrap();
+  return re
+    .replace_all(&contents, "")
+    .to_string()
+    .replace("{{!", "{{");
 }
