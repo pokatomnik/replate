@@ -64,4 +64,4 @@ That's could be easily done by this:
 
 This `README.md` can be generated with `readmegen.sh` located in the root repo, but you must build the tool first, of course.
 
-Reame updated: четверг, 8 апреля 2021 г. 01:52:11 (MSK)
+Reame updated: пятница,  9 апреля 2021 г. 00:28:01 (MSK)
